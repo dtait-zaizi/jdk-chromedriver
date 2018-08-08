@@ -1,0 +1,50 @@
+version: '3'
+networks:
+  default:
+    external:
+      #name: ${DEFAULT_NETWORK}
+      name: gitea-network
+
+volumes:
+  vol_portainer: 
+    driver: local
+
+services:
+  portainer:                         
+    image: portainer/portainer:latest
+    ports:         
+      - 9910:9000                              
+    volumes:                                     
+      - /var/run/docker.sock:/var/run/docker.sock
+#
+#  chromedriver:
+#    image: taitd/jdk-chromedriver:latest
+#    ports:
+#      - 8380:3000
+#    volumes:
+#      - gitea-data:/data
+#      - ./data:/data/gitea
+#    restart: always
+#    external_links:
+#      - gitea-db
+#    depends_on:
+#      - gitea-db
+#    environment:
+#      - POSTGRES_PASSWORD=test
+#      - POSTGRES_DB=gitea
+#
+  workflow-engine:
+    image: taitd/workflow-engine
+#    ports:
+#      - 8380:3000
+#    volumes:
+#      - gitea-data:/data
+#      - ./data:/data/gitea
+    restart: always
+#    external_links:
+#      - gitea-db
+#    depends_on:
+#      - gitea-db
+#    environment:
+#      - POSTGRES_PASSWORD=test
+#      - POSTGRES_DB=gitea
